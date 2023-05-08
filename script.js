@@ -62,10 +62,7 @@ function handleSubmit(e) {
 function getAllTasks() {
     if(localStorage.length < 1) return;
 
-    for(let i = 0; i < localStorage.length; ++i) {
-        console.log(localStorage.getItem(localStorage.key(i)))
-        addTaskToDOM(localStorage.getItem(localStorage.key(i)))
-    };
+    for(let i = 0; i < localStorage.length; ++i) addTaskToDOM(localStorage.getItem(localStorage.key(i)));
 }
 
 getAllTasks();
