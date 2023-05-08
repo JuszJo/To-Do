@@ -13,10 +13,29 @@ function storeTask(task) {
     localStorage.setItem(`${Date.now()}`, task)
 }
 
-function addTaskToDOM(task) {
-    let itemContainer = document.createElement('div');
-    let buttonContainer = document.createElement('button')
+function addStyles(itemContainer, buttonContainer) {
+    itemContainer.classList.add('item-container');
+    buttonContainer.classList.add('button-div'); 
+}
 
+function addTaskToDOM(task) {
+    let list = document.querySelector('.list');
+    let itemContainer = document.createElement('div');
+    let taskDOM = document.createElement('p');
+    let buttonContainer = document.createElement('div')
+    let button = document.createElement('button');
+
+    addStyles(itemContainer, buttonContainer);
+
+    button.innerHTML = "Delete";
+    button.addEventListener('click', handleTaskDelete);
+
+    taskDOM.innerHTML = task;
+
+    buttonContainer.append(button);
+    itemContainer.append(taskDOM, buttonContainer);
+
+    list.append(itemContainer);
 }
 
 function handleSubmit(e) {
@@ -27,6 +46,8 @@ function handleSubmit(e) {
     if(!task.value) return;
 
     storeTask(task.value)
+
+    addTaskToDOM(task.value)
 
     resetInput(task)
 }
