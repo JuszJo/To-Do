@@ -1,16 +1,23 @@
-
 function resetInput(task) {
-    task.value = ''
+    task.value = '';
 }
 
 function handleTaskDelete() {
+    let task = this.parentElement.previousElementSibling.innerHTML;
+
+    for(let i = 0; i < localStorage.length; ++i) if(localStorage.getItem(localStorage.key(i)) == task) deleteTask(localStorage.key(i));
+
     let taskContainer = this.parentElement.parentElement;
 
     taskContainer.remove();
 }
 
+function deleteTask(id) {
+    localStorage.removeItem(id);
+}
+
 function storeTask(task) {
-    localStorage.setItem(`${Date.now()}`, task)
+    localStorage.setItem(`${Date.now()}`, task);
 }
 
 function addStyles(itemContainer, buttonContainer) {
@@ -45,19 +52,26 @@ function handleSubmit(e) {
 
     if(!task.value) return;
 
-    storeTask(task.value)
+    storeTask(task.value);
 
-    addTaskToDOM(task.value)
+    addTaskToDOM(task.value);
 
-    resetInput(task)
+    resetInput(task);
 }
 
+function getAllTasks() {
+    if(localStorage.length < 1) return;
+
+    for(let i = 0; i < localStorage.length; ++i) {
+        console.log(localStorage.getItem(localStorage.key(i)))
+        addTaskToDOM(localStorage.getItem(localStorage.key(i)))
+    };
+}
+
+getAllTasks();
 
 let deleteButtons = document.querySelectorAll('button');
 
 let submitButton = document.getElementById('task');
 
-deleteButtons.forEach(value => value.addEventListener('click', handleTaskDelete));
-
-window.addEventListener('keydown', handleSubmit)
-
+window.addEventListener('keydown', handleSubmit);
