@@ -26,14 +26,38 @@ input[type="submit"] {
 }
 
 p {
-    text-align: center;
+    text-align: inherit;
+    /* flex-basis: 50%; */
+    flex: 1;
+    overflow: scroll;
+}
+
+p::-webkit-scrollbar {
+    display: none;
 }
 
 button {
     height: 1.2rem;
     width: 4rem;
     text-align: center;
-    margin-left: 2rem;
+    margin-left: 1rem;
     border: 0;
     cursor: pointer;
+}
+
+.list {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+}
+
+.item-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+    /* overflow: scroll; */
+}
+
+.button-div {
+    flex-basis: 20%;
 }
